@@ -1,0 +1,162 @@
+﻿<Window x:Class="WarehouseApp.DashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Склад - Рабочее место сотрудника" Height="720" Width="1000" MinWidth="900"
+        WindowStartupLocation="CenterScreen" Background="#F5F6FA">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#3498DB" CornerRadius="6" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock x:Name="WelcomeText" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock x:Name="RoleText" FontSize="13" Foreground="#ECF0F1" Margin="0,3,0,0"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content=" Выйти" Background="#E74C3C" Width="100" Click="Logout_Click"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Background="#FFFFFF" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Номер:" Grid.Column="0" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBox x:Name="FormNumber" Grid.Column="1" Margin="0,5"/>
+
+                    <TextBlock Text="Дата:" Grid.Column="3" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <DatePicker x:Name="FormDate" Grid.Column="4" Margin="0,5"/>
+
+                    <TextBlock Text="Тип:" Grid.Column="6" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox x:Name="FormType" Grid.Column="7" Margin="0,5" SelectedIndex="0">
+                        <ComboBoxItem Content="Приход"/>
+                        <ComboBoxItem Content="Расход"/>
+                    </ComboBox>
+                </Grid>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content=" Добавить" Background="#2ECC71" Click="AddWaybill_Click" Width="110" Margin="0,0,6,0"/>
+                    <Button Content=" Редактировать" Background="#3498DB" Click="Edit_Click" Width="130" Margin="0,0,6,0"/>
+                    <Button Content="️ Удалить" Background="#E74C3C" Click="DeleteWaybill_Click" Width="90" Margin="0,0,6,0"/>
+                    <Button Content=" Обновить список" Background="#95A5A6" Click="RefreshList_Click" Width="130"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2" Background="#FFFFFF" BorderBrush="#FFFFFF" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text=" Товары в выбранной накладной" FontSize="14" FontWeight="Bold" Foreground="#16A085" Margin="0,0,0,10"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Название:" Grid.Column="0" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBox x:Name="FormProductName" Grid.Column="1" Margin="0,5"/>
+
+                    <TextBlock Text="Артикул:" Grid.Column="3" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBox x:Name="FormProductArticle" Grid.Column="4" Margin="0,5"/>
+
+                    <TextBlock Text="Количество:" Grid.Column="6" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBox x:Name="FormProductQuantity" Grid.Column="7" Margin="0,5" Text="1"/>
+
+                    <StackPanel Grid.Column="8" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content=" Добавить товар" Background="#27AE60" Click="AddProduct_Click" Width="130" Margin="0,0,6,0"/>
+                        <Button Content="️ Удалить товар" Background="#C0392B" Click="DeleteProduct_Click" Width="120"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="3" Background="#FFFFFF" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0,0,0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text=" Все накладные" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,0,0,5"/>
+                <DataGrid x:Name="WaybillGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" 
+                          SelectionChanged="WaybillGrid_SelectionChanged" GridLinesVisibility="None" 
+                          RowBackground="#F8F9FA" AlternatingRowBackground="#E9ECEF" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="№ Накладной" Binding="{Binding Number}" Width="150"/>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="130"/>
+                        <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock Grid.Row="2" Text=" Товары" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,5,0,5"/>
+                <DataGrid x:Name="ProductGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" 
+                          SelectionChanged="ProductGrid_SelectionChanged" GridLinesVisibility="None" 
+                          RowBackground="#F8F9FA" AlternatingRowBackground="#E9ECEF" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="200"/>
+                        <DataGridTextColumn Header="Артикул" Binding="{Binding Article}" Width="150"/>
+                        <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+        <TextBlock x:Name="StatusMsg" Grid.Row="4" Foreground="#7F8C8D" TextAlignment="Center" Margin="0,8" FontSize="13"/>
+    </Grid>
+</Window>
